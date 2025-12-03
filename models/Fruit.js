@@ -24,11 +24,17 @@ class Fruit{
     }
 
     static create = (data) => {
+        // At this point data is: {name: "Starberry"}
         const newFruit = data
-        console.log(newFruit)
+        const updatedFruit = fruits.find(fruit => fruit.name.toLowerCase() == newFruit.name.toLowerCase())
+        if(!updatedFruit) {
         newFruit["id"] = fruits.length + 1 //normally, it will automatically update the id
+        // Here it's: {name: "Starberry", id: num}
         fruits.push(newFruit)
         return new Fruit(newFruit)
+        } else {
+            throw Error("Fruit already exists")
+        }
     }
 
     //static method doesn't pass down to the instaance, so for update, we do want it to pass to the instance
